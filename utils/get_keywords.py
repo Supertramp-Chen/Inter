@@ -1,0 +1,57 @@
+# -*- coding:utf-8 -*-
+
+# 面向对象的方式来进行封装
+import jsonpath
+import logging
+
+class GetKeywords(object):
+    """
+    我们要去实现对jsonpath的二次封装
+    通过jsonpath来获取返回值
+    """
+
+    @staticmethod
+    def get_keyword(data,name,index=0):
+        """
+        获取json数据里面的一个数据
+        :param data: 元数据
+        :param name: 需要提取的名称
+        :param index: 索引，默认是0
+        :return: 最终提取的数据
+        """
+        try:
+            """name=Excel里面的code"""
+            # print("name=",f"{name}")
+            """
+            Excel里不用再写$..code 直接写code
+              f"$..{name}" 先被 f-string 解析成 "$..code"，即查询 code 字段
+            $  → 代表 JSON 根节点（从 JSON 最外层开始）
+	        .. → 代表搜索 JSON 的所有层级（无论 name 处于 JSON 结构的哪个层级）
+	        {name} → code，即你想要提取的字段
+	        jsonpath.jsonpath() 返回所有匹配项
+	        返回 list"""
+            print("\njson解析后的res=", data, "\ntype-json解析后的res=", type(data))
+            result = jsonpath.jsonpath(data,f"$..{name}")[index]
+        except Exception as e:
+            result =  False
+        if result is False:
+            logging.error(f"jsonpath提取失败: 原本提取的元数据是{data}，提取的值是{name}")
+        else:
+            return result
+
+    # @staticmethod
+    # def get_keywords(data, name):
+    #     """
+    #     获取提取的多个数据
+    #     :param data: 元数据
+    #     :param name: 需要提取的名称
+    #     :return: 提取出来的数据列表
+    #     """
+    #     try:
+    #         result = jsonpath.jsonpath(data, f"$..{name}")
+    #     except Exception as e:
+    #         result = False
+    #     if result is False:
+    #         logging.error(f"jsonpath提取失败: 原本提取的元数据是{data}，提取的值是{name}")
+    #     else:
+    #         return result

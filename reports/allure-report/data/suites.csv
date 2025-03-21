@@ -1,0 +1,7 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"
+        让 all 这个局部变量指向 self.all(函数外的类属性) 这个字典的引用
+            如果 self.all 访问的实例属性不存在，就会访问 TestRunner.all（类属性）
+            self.all = {""user_id"": ""1001""}  # 这样就变成实例属性
+            print(self.all)  # 访问的是实例属性，不再访问类属性
+        ","317","ID:138 -- 成功获取验证码","testcases","Sun Mar 09 19:11:43 CST 2025","passed","Sun Mar 09 19:11:43 CST 2025","TestRunner","test_runner","",""

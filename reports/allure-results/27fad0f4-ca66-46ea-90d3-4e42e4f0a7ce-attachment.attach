@@ -1,0 +1,1 @@
+{'method': 'get', 'url': 'http://test.os-api.vertlet.com/talent/get-country', 'headers': {'xl-os-token': 'fR2zVafXlYtIie7snw1yMeOCz3i/ms1imOELbIsj6CEp45Ei8XEeZI2/3Ppj7dpquHuW7oN1agDfTiQRsGGu7ss+jtMXX6SkoqMgEd6ADhA='}, 'params': None, 'data': None, 'json': None, 'files': None}
