@@ -8,7 +8,7 @@ import allure
     ├── 🔸 账号密码场景
     │      ├── ✅ ID:3 -- 登录成功
     │      ├── ❌ ID:4 -- 登录失败
-
+    
 📂 未分类的测试
     ├── ✅ test_case (case1)
     ├── ❌ test_case (case2)
@@ -23,4 +23,4 @@ def allure_init(case):
     """
     allure.dynamic.story(case["story"])
     # allure.dynamic.title(case["title"])
-    allure.dynamic.title(f"ID:{case["id"]} -- {case["title"]}")
+    allure.dynamic.title(f"ID:{case['id']} -- {case['title']}")
