@@ -2,7 +2,7 @@
 # BASE_URL = "https://cloud.gyjerp.com"
 BASE_URL = "http://60.204.225.104:9632"
 
-# excel格式的测试用例文件配置
+# excel格式的测试用例文件配置。
 EXCEL_FILE = "./data/测试用例完整版.xlsx"
 SHEET_NAME = "Sheet1"
 
