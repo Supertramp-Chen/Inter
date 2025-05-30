@@ -1,22 +1,31 @@
-# -*- coding:utf-8 -*-
-# 北梦测教育
-# 课程咨询加微信：xiaobeiceshi
-
 import pymysql
 from pymysql.cursors import DictCursor
 from config.config import *
 import logging
 from apiException.custom_exception import *
 
+"""
+封装对 MySQL 数据库的连接 查询 修改操作"""
 class Database:
     def __init__(self):
         # 因为只在内部会去访问这个self.__db
         # 因此可以把它设置为私有属性
+        """
+        创建 Database 类时，会自动调用 __getConnet() 方法建立数据库连接。
+	    self.__db 是 私有属性，外部不能直接访问，表示数据库连接对象
+        私有连接属性，通过 __getConnet() 初始化。
+	    出错时抛出自定义异常，方便排查问题"""
         self.__db = self.__getConnet()
 
     @staticmethod
     def __getConnet():
+        # 建立数据库连接
         # 创建连接对象的方法
+        """
+        pymysql.Connect 创建连接，使用配置（DB_HOST、DB_USER等）连接数据库。
+	•	autocommit=True 表示每次操作后自动提交（否则需要手动 commit）。
+	•	如果连接失败，记录日志并抛出自定义异常 DatabaseException。
+        """
         try:
             conn = pymysql.Connect(
                 host=DB_HOST,
@@ -31,7 +40,12 @@ class Database:
         except Exception as e:
             logging.error(f"数据库连接失败, 错误异常是: {e}")
             raise DatabaseException()
-
+    # 执行查询并返回一行数据
+    """
+    •	执行传入的 SQL 查询（sql）。
+	•	使用 DictCursor，返回的是 字典形式，而不是元组。
+	•	返回查询到的 一行数据（字典形式）
+	get_one 查询一行数据（返回字典）。"""
     def get_one(self,sql):
         try:
             if self.__db:
@@ -42,7 +56,12 @@ class Database:
         except Exception as e:
             logging.error(f"数据库查询失败, 错误异常是: {e}")
             raise GetDataException()
-
+    # 执行多条 SQL 语句
+    """
+    •	接收 多个 SQL 语句（*sqls 不定参数，打包为元组）。
+	•	依次执行每条语句（比如更新、删除语句）。
+	•	如果出错，抛出 ExecuteSqlException。
+	execute_sql 执行多个更新/删除语句"""
     def execute_sql(self,*sqls):  # *参数，表示不定传参，打包成一个元组
 
         try:

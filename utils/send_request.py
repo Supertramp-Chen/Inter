@@ -30,6 +30,7 @@ def send_http_request(**request_data):
 
 
 def send_jdbc_request(sql):
+    # 使用Database类执行SQL查询
     return Database().get_one(sql)
     # conn = pymysql.Connect(
     #     host=DB_HOST,
