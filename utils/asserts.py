@@ -5,25 +5,30 @@ from utils.get_keywords import GetKeywords
 from utils.base_asserts import MainAsserts
 from abc import ABC, abstractmethod
 import pytest
-"""
-json断言我二次封装了jsonpath，用了try来抓取异常 如果没有在响应数据里面没有找到
-  （jsonpath二次封装：在响应断言中判断case[“check”]是否存在 不存在就判断expect是否在res.text里面，
-   存在就使用二次封装的jsonpath把res.json(responsed变成dict)和check传入 提取res里面的目标字段
-jsonpath二次封装让excel里的expect不用写$..code 通过jsonpath.jsonpath(case,f"$..{name}")
-	然后使用try expect如果jsonpath没有找到抓取异常把result=false 判断result的值为false的话输出查找失败）
-"""
-"""定义 HTTP 断言的抽象基类"""
+
+'''多态：
+不同子类对象可以用同一个父类引用来表示。
+调用方法时，根据对象的真实类型，自动调用对应子类的方法。'''
+
+"""定义 HTTP 断言的 抽象基类定义接口（父类）
+所有断言类都要有http_assert()方法，具体实现由子类决定"""
 class DataAssert(ABC):
     @abstractmethod
     def http_assert(self, case, res):
         pass
+
+"""工厂函数根据case动态选择子类（实现多态）"""
 def obj_processor(case):
     """
     对象处理，根据传入的case的不同，来返回不同的对象
-    :return:
     """
     try:
         # 可能出现异常的代码
+        """'eval 就是把字符串当成Python表达式来解析
+        'code' → ❌ 解析失败（抛异常） → 走单断言
+        因为Python会把 'code' 当作变量名去解析。
+但是程序里并没有定义一个变量 code，所以 Python解释器会抛出异常： NameError: name 'code' is not defined。
+        {"code":200}' → ✅ 解析成 {"code":200} → 走多断言"""
         eval(case["check"])
     except:
         # 出现异常之后，表示断言不是字典，因此走老逻辑
@@ -32,6 +37,10 @@ def obj_processor(case):
     else:
         # 没有出现异常，表示可以转成字典，走多重断言的逻辑
         return MultipleAssert()
+
+"""调用时用父类引用（多态体现）：
+这里obj是父类类型（DataAssert），但实际指向的对象可以是SingleAssert或MultipleAssert。
+调用http_assert时，Python自动根据真实对象类型，调用对应实现"""
 def http_assert(case, res):
     """
     真正的调用逻辑，后续无论怎么新增http返回值的断言，都是调用这个函数
@@ -40,6 +49,9 @@ def http_assert(case, res):
     :return:
     """
     obj_processor(case).http_assert(case, res)
+
+"""子类继承并实现方法（多态核心）
+两个子类方法签名完全一样（都是http_assert(case, res)），但内部实现不同"""
 class SingleAssert(DataAssert):
     @allure.step("3.HTTP响应断言")
     def http_assert(self, case, res):

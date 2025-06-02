@@ -1,1 +1,0 @@
-{'method': 'post', 'url': 'http://60.204.225.104:9632/login', 'headers': {'content-type': 'application/json;charset=UTF-8'}, 'params': None, 'data': None, 'json': {'password': 'e10adc3949ba59abbe56e057f20f883e', 'username': 'admin', 'uuid': '6074084d1c824b31aee41f1673d7469b', 'code': '2'}, 'files': None}

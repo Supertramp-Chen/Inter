@@ -1,11 +1,13 @@
 # -*- coding:utf-8 -*-
-# 北梦测教育
-# 课程咨询加微信：xiaobeiceshi
 
 # 面向对象的方式来进行封装
 import jsonpath
 import logging
-
+"""json断言我二次封装了jsonpath，用了try来抓取异常 如果没有在响应数据里面没有找到
+  （jsonpath二次封装：在响应断言中判断case[“check”]是否存在 不存在就判断expect是否在res.text里面，
+   存在就使用二次封装的jsonpath把res.json(responsed变成dict)和check传入 提取res里面的目标字段
+jsonpath二次封装让excel里的expect不用写$..code 通过jsonpath.jsonpath(case,f"$..{name}")
+	然后使用try expect如果jsonpath没有找到抓取异常把result=false 判断result的值为false的话输出查找失败）"""
 class GetKeywords(object):
     """
     我们要去实现对jsonpath的二次封装

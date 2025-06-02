@@ -1,6 +1,0 @@
-[32mINFO    [0m root:test_runner.py:109 0.用例ID:2 模块:登录 场景:登录 标题:正常登录获取token
-[32mINFO    [0m root:analyse_case.py:48 1.解析请求数据, 请求数据为: {'method': 'post', 'url': 'http://60.204.225.104:9632/login', 'headers': {'content-type': 'application/json;charset=UTF-8'}, 'params': None, 'data': None, 'json': {'password': 'e10adc3949ba59abbe56e057f20f883e', 'username': 'admin', 'uuid': '6074084d1c824b31aee41f1673d7469b', 'code': '2'}, 'files': None}
-[32mINFO    [0m root:send_request.py:19 登录请求等待3秒...
-[32mINFO    [0m root:send_request.py:27 2.发送HTTP请求, 响应内容为: {'status_code': 200, 'json_data': {'msg': '操作成功', 'code': 200, 'token': 'eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjE3MTFiZDYwLWI1OWItNDRlMy1hNTBkLTAxZjVkZGQ1NzJmNyJ9.jgKhUjIMl5YutTZx2kLOGpOcEbbFQfA1xTCvIX39PiLBCjlF99GTQmgSarJJio3OqqdC6VP1vqKDmQyTI17hJg'}, 'response_time': 256.895}
-[32mINFO    [0m root:asserts.py:51 3.HTTP响应断言内容: 实际结果(200) == 预期结果(200)
-[32mINFO    [0m root:extractor.py:19 4.JSON提取, 根据{"token":"token"}提取数据, 此时全局变量为: {'uuid': '6074084d1c824b31aee41f1673d7469b', 'token': 'eyJhbGciOiJIUzUxMiJ9.eyJsb2dpbl91c2VyX2tleSI6IjE3MTFiZDYwLWI1OWItNDRlMy1hNTBkLTAxZjVkZGQ1NzJmNyJ9.jgKhUjIMl5YutTZx2kLOGpOcEbbFQfA1xTCvIX39PiLBCjlF99GTQmgSarJJio3OqqdC6VP1vqKDmQyTI17hJg'}

@@ -17,6 +17,10 @@ class Database:
 	    出错时抛出自定义异常，方便排查问题"""
         self.__db = self.__getConnet()
 
+    '''静态方法：直接用 类名.方法名() 调用，不需要实例化对象
+    🔸 因为 __getConnet() 既不访问对象属性（self），也不访问类属性（cls），
+    🔸 它只负责根据固定的配置返回一个数据库连接。
+    🔸 用静态方法的方式定义，更清晰、简洁、高效。'''
     @staticmethod
     def __getConnet():
         # 建立数据库连接
@@ -34,13 +38,13 @@ class Database:
                 user=DB_USER,
                 password=DB_PASSWORD,
                 charset="utf8",
-                autocommit=True
+                autocommit=True #如果没设置 autocommit=True，那么数据库连接默认开启事务，执行 SQL 后必须 显式调用 conn.commit()，否则修改不会生效。
+
             )
             return conn
         except Exception as e:
             logging.error(f"数据库连接失败, 错误异常是: {e}")
             raise DatabaseException()
-    # 执行查询并返回一行数据
     """
     •	执行传入的 SQL 查询（sql）。
 	•	使用 DictCursor，返回的是 字典形式，而不是元组。
@@ -56,14 +60,12 @@ class Database:
         except Exception as e:
             logging.error(f"数据库查询失败, 错误异常是: {e}")
             raise GetDataException()
-    # 执行多条 SQL 语句
     """
     •	接收 多个 SQL 语句（*sqls 不定参数，打包为元组）。
 	•	依次执行每条语句（比如更新、删除语句）。
 	•	如果出错，抛出 ExecuteSqlException。
 	execute_sql 执行多个更新/删除语句"""
     def execute_sql(self,*sqls):  # *参数，表示不定传参，打包成一个元组
-
         try:
             # 执行sql，不需要返回值--删除，修改
             if self.__db:
@@ -81,9 +83,12 @@ class Database:
 
 if __name__ == '__main__':
     db = Database()
-    SQL1 = 'UPDATE base_data_product_brand set NAME = "大米" where code = 001'
+    # SQL1 = 'UPDATE base_data_product_brand set NAME = "大米" where code = 001'
     # SQL2 = 'select * from tbl_shop'
+    SQL1 = 'select * from sp_user'
+    SQL2 = 'select * from sp_order'
     db.execute_sql(SQL1)
+    print(db.get_one(SQL1))
     # print(db.get_one("select `code1` from base_data_product_brand"))
 
 

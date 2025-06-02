@@ -17,6 +17,7 @@ def send_http_request(**request_data):
     if '/login' in url:
         time.sleep(3)  # 只对登录请求添加3秒延时
         logging.info("登录请求等待3秒...")
+
     res = requests.request(**request_data)
     # print("res=", res.text, "\ntype-res=", type(res.text))
     response = {
