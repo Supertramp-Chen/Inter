@@ -1,0 +1,6 @@
+[32mINFO    [0m root:test_runner.py:109 0.用例ID:1 模块:登录 场景:获取uuid 标题:成功获取uuid
+[32mINFO    [0m root:analyse_case.py:48 1.解析请求数据, 请求数据为: {'method': 'get', 'url': 'http://60.204.225.104:9632/captchaImage', 'headers': None, 'params': None, 'data': None, 'json': None, 'files': None}
+[32mINFO    [0m root:send_request.py:28 2.发送HTTP请求, 响应内容为: {'status_code': 200, 'json_data': {'msg': '操作成功', 'code': 200, 'captchaOnOff': False}, 'response_time': 75.765}
+[32mINFO    [0m root:asserts.py:69 3.HTTP响应断言内容: 实际结果(200) ?== 预期结果(200)
+[1m[31mERROR   [0m root:get_keywords.py:33 jsonpath提取失败: 原本提取的元数据是{'status_code': 200, 'json_data': {'msg': '操作成功', 'code': 200, 'captchaOnOff': False}, 'response_time': 75.765}，提取的值是uuid
+[32mINFO    [0m root:extractor.py:18 4.JSON提取, 根据{"uuid":"uuid"}提取数据, 此时全局变量为: {'uuid': None}

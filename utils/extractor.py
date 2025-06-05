@@ -10,14 +10,12 @@ def json_extractor(case, all, res):
             # 首先要把 jsonExData 的 key, value 拆开
             for key, value in eval(case["jsonExData"]).items():
                 # value = jsonpath.jsonpath(res.json(), value)[0]
-
                 value = GetKeywords.get_keyword(res,value)
                 # print(key)
                 # print(value)
                 all[key] = value
                 # print(all)
             logging.info(f"4.JSON提取, 根据{case['jsonExData']}提取数据, 此时全局变量为: {all}")
-
 
 def jdbc_extractor(case, all):
     if case["sqlExData"]:
@@ -30,7 +28,6 @@ def jdbc_extractor(case, all):
                 all[key] = value
                 # print(all)
             logging.info(f"4.JDBC提取, 根据{case['sqlExData']}提取数据, 此时全局变量为: {all}")
-
 
 # 单独写一个方法/函数来处理正则表达式
 def re_match_value(string,pattern,index=0):
@@ -49,7 +46,6 @@ def re_match_value(string,pattern,index=0):
     matches = [match.group(1) for match in re.finditer(pattern,string)]
     return matches[index]
 
-
 def re_extractor(case,all,res):
     if case["reExData"]:
         with allure.step("4.正则提取"):
@@ -57,5 +53,4 @@ def re_extractor(case,all,res):
                 # value:表达式
                 v = re_match_value(str(res),value)
                 all[key] = v
-
             logging.info(f"4.正则提取, 根据{case['reExData']}提取数据, 此时全局变量为: {all}")

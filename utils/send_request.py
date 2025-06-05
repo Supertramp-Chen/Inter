@@ -21,7 +21,7 @@ def send_http_request(**request_data):
     res = requests.request(**request_data)
     # print("res=", res.text, "\ntype-res=", type(res.text))
     response = {
-        "status_code":res.status_code,
+        "status_code":res.status_code,# 状态码
         "json_data":res.json(),
         "response_time":res.elapsed.total_seconds() * 1000
     }

@@ -117,24 +117,6 @@ class TestRunner:
         """
         ✅ 响应断言 检查 response.status_code 和 response.json() 是否符合预期"""
         http_assert(case, res)
-        # HTTP响应断言
-        # try:
-        #     # 可能出现异常的代码
-        #     eval(case["check"])
-        # except:
-        #     # 出现异常之后，表示断言不是字典，因此走老逻辑
-        #     http_assert(case, res)
-        # else:
-        #     # 没有出现异常，表示可以转成字典，走多重断言的逻辑
-        #     http_asserts(case, res)
-
-        # 数据库断言
-        # try:
-        #     eval(case["sql_check"])
-        # except:
-        #     jdbc_assert(case)
-        # else:
-        #     jdbc_asserts(case)
         """
         ✅ SQL断言 执行 SQL 查询，检查数据库里是否有对应数据。"""
         jdbc_assert(case)

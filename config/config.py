@@ -17,7 +17,7 @@ DB_PASSWORD = "xiaobeiup"
 # SQL1 = 'DELETE from base_data_store_center where code = "bm_ck_04" or code = "bm_ck_05"'
 SQL1 = 'select * from sp_user'
 SQL2 = 'select * from sp_order'
-# SQL2 = """DELETE from op_logs where extra = '{"code":"bm_ck_04","name":"北梦测试仓库4"}' or extra = '{"code":"bm_ck_05","name":"北梦测试仓库5"}'"""
+# SQL2 = """DELETE from op_logs where extra = '{"code":"bm_ck_04","name":"仓库4"}' or extra = '{"code":"bm_ck_05","name":"仓库5"}'"""
 
 
 
